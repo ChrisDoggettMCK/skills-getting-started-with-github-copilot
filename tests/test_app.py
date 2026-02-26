@@ -1,3 +1,9 @@
+"""Tests for the Mergington High School activity registration API.
+
+The ``client`` fixture is provided by conftest.py and is auto-discovered by pytest.
+"""
+
+
 def test_get_activities_returns_activity_map(client):
     response = client.get("/activities")
 
