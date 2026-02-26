@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("/activities", { cache: "no-store" });
       const activities = await response.json();
 
+      // Preserve current selection before clearing
+      const previousSelection = activitySelect.value;
+
       // Clear loading message
       activitiesList.innerHTML = "";
       activitySelect.innerHTML = '<option value="">-- Select an activity --</option>';
@@ -65,6 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = name;
         activitySelect.appendChild(option);
       });
+
+      // Restore previous selection if it still exists
+      if (previousSelection) {
+        activitySelect.value = previousSelection;
+      }
     } catch (error) {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
       console.error("Error fetching activities:", error);
