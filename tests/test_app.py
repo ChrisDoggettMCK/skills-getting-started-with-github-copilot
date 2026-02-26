@@ -77,3 +77,63 @@ def test_unregister_returns_not_found_for_non_member(client):
 
     assert response.status_code == 404
     assert response.json()["detail"] == "Student is not signed up for this activity"
+
+
+def test_signup_rejects_empty_email(client):
+    response = client.post(
+        "/activities/Chess%20Club/signup",
+        params={"email": ""},
+    )
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert "detail" in payload
+
+
+def test_signup_rejects_whitespace_email(client):
+    response = client.post(
+        "/activities/Chess%20Club/signup",
+        params={"email": "   "},
+    )
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert "detail" in payload
+
+
+def test_signup_requires_email_param(client):
+    response = client.post("/activities/Chess%20Club/signup")
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert "detail" in payload
+
+
+def test_unregister_rejects_empty_email(client):
+    response = client.delete(
+        "/activities/Programming%20Class/participants",
+        params={"email": ""},
+    )
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert "detail" in payload
+
+
+def test_unregister_rejects_whitespace_email(client):
+    response = client.delete(
+        "/activities/Programming%20Class/participants",
+        params={"email": "   "},
+    )
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert "detail" in payload
+
+
+def test_unregister_requires_email_param(client):
+    response = client.delete("/activities/Programming%20Class/participants")
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert "detail" in payload
