@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ? `<ul class="participants-list">${details.participants
                 .map(
                   (participant) =>
-                    `<li class="participant-item"><span>${escapeHtml(participant)}</span><button type="button" class="delete-participant-btn" data-activity="${encodeURIComponent(name)}" data-email="${encodeURIComponent(participant)}" aria-label="Remove ${escapeHtml(participant)} from ${escapeHtml(name)}" title="Remove participant">🗑️</button></li>`
+                    `<li class="participant-item"><span>${escapeHtml(participant)}</span><button type="button" class="delete-participant-btn" data-activity="${encodeURIComponent(name)}" data-email="${encodeURIComponent(participant)}" aria-label="Remove ${escapeHtml(participant)} from ${escapeHtml(name)}" title="Remove participant">🗑️ Remove</button></li>`
                 )
                 .join("")}</ul>`
             : `<p class="participants-empty">No participants yet</p>`;
